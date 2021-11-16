@@ -1,23 +1,57 @@
 syntax = "proto3";
 
 message Attestation {
-  string type = 1
-  repeated Subject subject = 2
-  string predicate_type = 3
-  predicate Predicate = 4
+  string type = 1;
+  repeated Subject subject = 2;
+  string predicate_type = 3;
+  Predicate predicate = 4;
 }
 
 message Subject {
-  string name = 1
-  string digest = 2
+  string name = 1;
+  string digest = 2;
 }
 
 message Predicate {
-
+  Builder builder = 1;
+  string build_type = 2;
+  Invocation invocation = 3;
+  NullValue build_config = 4;
+  Metadata metadata = 5;
+  repeated Material materials = 6;
 }
 
 message Builder {
-  string query = 1;
-  int32 page_number = 2;
-  int32 result_per_page = 3;
+  string id = 1;
+}
+
+message Invocation {
+  ConfigSource config_source = 1;
+  NullValue parameters = 2;
+  NullValue environment = 3;
+}
+
+message ConfigSource {
+  string uri = 1;
+  map<string, string> digest = 2;
+  string entrypoint = 3;
+}
+
+message Metadata {
+  string build_invocation_id = 1;
+  Timestamp build_started_on = 2;
+  Timestamp build_finished_on = 3;
+  Completeness completeness = 4;
+  bool reproducible = 5;  
+}
+
+message Completeness {
+  bool parameters = 1;
+  bool environment = 2;
+  bool materials = 3;
+}
+
+message Material {
+  string uri = 1;
+  map<string, string> digest = 2;
 }
