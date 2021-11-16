@@ -16,7 +16,8 @@ message Predicate {
   Builder builder = 1;
   string build_type = 2;
   Invocation invocation = 3;
-  NullValue build_config = 4;
+  // should be nullable object
+  string build_config = 4;
   Metadata metadata = 5;
   repeated Material materials = 6;
 }
@@ -27,8 +28,10 @@ message Builder {
 
 message Invocation {
   ConfigSource config_source = 1;
-  NullValue parameters = 2;
-  NullValue environment = 3;
+  // should be nullable
+  string parameters = 2;
+  // should be nullable
+  string environment = 3;
 }
 
 message ConfigSource {
@@ -39,8 +42,8 @@ message ConfigSource {
 
 message Metadata {
   string build_invocation_id = 1;
-  Timestamp build_started_on = 2;
-  Timestamp build_finished_on = 3;
+  string build_started_on = 2;
+  string build_finished_on = 3;
   Completeness completeness = 4;
   bool reproducible = 5;  
 }
