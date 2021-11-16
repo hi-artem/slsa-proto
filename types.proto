@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+message Attestation {
+  string type = 1
+  repeated Subject subject = 2
+  string predicate_type = 3
+  predicate Predicate = 4
+}
+
+message Subject {
+  string name = 1
+  string digest = 2
+}
+
+message Predicate {
+
+}
+
+message Builder {
+  string query = 1;
+  int32 page_number = 2;
+  int32 result_per_page = 3;
+}
